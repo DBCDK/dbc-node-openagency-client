@@ -11,6 +11,7 @@
     "reinstall": "rm -r node_modules && npm install",
     "test:watch": "mocha --compilers js:babel/register src/**/__tests__/*.test.js -w",
     "test": "mocha --compilers js:babel/register src/__tests__/*.test.js -R mocha-jenkins-reporter",
+    "test:junit": "npm run test",
     "watch": "npm run cleardest && babel ./src --watch -d dist --ignore __tests__"
   },
   "repository": {
