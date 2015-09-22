@@ -3,6 +3,7 @@
 import * as BaseSoapClient from 'dbc-node-basesoap-client';
 
 let wsdl = null;
+let libraryType = null;
 
 function makeFindLibraryRequest (params) {
   let openagency = BaseSoapClient.client(wsdl, {});
@@ -22,7 +23,7 @@ export function getOpenAgency(values) {
 export function searchOpenAgency(values) {
   let params = {
     anyField: '?' + values.query + '?',
-    libraryType: 'Folkebibliotek',
+    libraryType: libraryType,
     pickupAllowed: 1
   };
 
@@ -46,6 +47,7 @@ export function init(config) {
   if (!wsdl) {
     wsdl = config.wsdl;
   }
+  libraryType = config.libraryType;
 
   return METHODS;
 }
