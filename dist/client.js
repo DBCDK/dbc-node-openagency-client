@@ -14,6 +14,7 @@ var _dbcNodeBasesoapClient = require('dbc-node-basesoap-client');
 var BaseSoapClient = _interopRequireWildcard(_dbcNodeBasesoapClient);
 
 var wsdl = null;
+var libraryType = null;
 
 function makeFindLibraryRequest(params) {
   var openagency = BaseSoapClient.client(wsdl, {});
@@ -33,7 +34,7 @@ function getOpenAgency(values) {
 function searchOpenAgency(values) {
   var params = {
     anyField: '?' + values.query + '?',
-    libraryType: 'Folkebibliotek',
+    libraryType: libraryType,
     pickupAllowed: 1
   };
 
@@ -59,6 +60,7 @@ function init(config) {
   if (!wsdl) {
     wsdl = config.wsdl;
   }
+  libraryType = config.libraryType;
 
   return METHODS;
 }

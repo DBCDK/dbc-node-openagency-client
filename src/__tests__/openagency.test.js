@@ -9,12 +9,13 @@ describe('Test OpenAgency Client', () => {
     setTimeout(done, timeout);
 
     const config = {
-      wsdl: 'http://openagency.addi.dk/2.22/?wsdl/openagency.wsdl'
+      wsdl: 'http://openagency.addi.dk/2.22/?wsdl/openagency.wsdl',
+      libraryType: 'Folkebibliotek'
     };
 
     OpenAgency.init(config);
     let result = OpenAgency.searchOpenAgency({
-      query: 'valb'
+      query: 'aarhus'
     });
 
     done();
