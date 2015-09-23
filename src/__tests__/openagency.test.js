@@ -47,4 +47,24 @@ describe('Test OpenAgency Client', () => {
 
     done();
   });
+
+  it('Assert names result', function(done) {
+    const timeout = 10000;
+    this.timeout(timeout);
+    setTimeout(done, timeout);
+
+    const config = {
+      wsdl: 'http://openagency.addi.dk/2.22/?wsdl/openagency.wsdl'
+    };
+
+    OpenAgency.init(config);
+    let result = OpenAgency.getNameLibrary({
+      libraryType: 'Folkebibliotek'
+    });
+
+    result.then(function(listResult) {
+      console.log(listResult);
+      done();
+    });
+  });
 });
