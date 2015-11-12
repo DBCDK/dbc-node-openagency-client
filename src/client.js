@@ -20,6 +20,16 @@ export function getOpenAgency(values) {
   });
 }
 
+export function getAgencyBranches(values) {
+  let openagency = BaseSoapClient.client(wsdl, {});
+
+  return values.id.map((val) => {
+    return openagency.request('pickupAgencyList', {
+      agencyId: val
+    }, {}, true);
+  });
+}
+
 export function searchOpenAgency(values) {
   let params = {
     anyField: '?' + values.query + '?',
@@ -32,6 +42,7 @@ export function searchOpenAgency(values) {
 
 export const METHODS = {
   getOpenAgency: getOpenAgency,
+  getAgencyBranches: getAgencyBranches,
   searchOpenAgency: searchOpenAgency
 };
 
