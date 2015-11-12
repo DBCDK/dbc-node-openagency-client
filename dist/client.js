@@ -4,6 +4,7 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 exports.getOpenAgency = getOpenAgency;
+exports.getAgencyBranches = getAgencyBranches;
 exports.searchOpenAgency = searchOpenAgency;
 exports.init = init;
 
@@ -31,6 +32,16 @@ function getOpenAgency(values) {
   });
 }
 
+function getAgencyBranches(values) {
+  var openagency = BaseSoapClient.client(wsdl, {});
+
+  return values.id.map(function (val) {
+    return openagency.request('pickupAgencyList', {
+      agencyId: val
+    }, {}, true);
+  });
+}
+
 function searchOpenAgency(values) {
   var params = {
     anyField: '?' + values.query + '?',
@@ -43,6 +54,7 @@ function searchOpenAgency(values) {
 
 var METHODS = {
   getOpenAgency: getOpenAgency,
+  getAgencyBranches: getAgencyBranches,
   searchOpenAgency: searchOpenAgency
 };
 
