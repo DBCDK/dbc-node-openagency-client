@@ -29,9 +29,15 @@ export function searchOpenAgency(values) {
   return makeFindLibraryRequest(params);
 }
 
+export function pickupAgencyList(params) {
+  let openagency = BaseSoapClient.client(wsdl, {});
+  return openagency.request('pickupAgencyListRequest', params, {}, true);
+}
+
 export const METHODS = {
   getOpenAgency: getOpenAgency,
-  searchOpenAgency: searchOpenAgency
+  searchOpenAgency: searchOpenAgency,
+  pickupAgencyList: pickupAgencyList
 };
 
 /**

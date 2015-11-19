@@ -1,6 +1,6 @@
 {
   "name": "dbc-node-openagency-client",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Client for dbc openagency webservice",
   "main": "index.js",
   "scripts": {
@@ -37,6 +37,6 @@
     "mocha-jenkins-reporter": "^0.1.9"
   },
   "dependencies": {
-    "dbc-node-basesoap-client": "git+https://github.com/DBCDK/dbc-node-basesoap-client#stable_dist"
+    "dbc-node-basesoap-client": "^1.1.2"
   }
 }
