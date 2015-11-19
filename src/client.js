@@ -3,6 +3,7 @@
 import * as BaseSoapClient from 'dbc-node-basesoap-client';
 
 let wsdl = null;
+let libraryType = null;
 
 function makeFindLibraryRequest (params) {
   let openagency = BaseSoapClient.client(wsdl, {});
@@ -19,25 +20,30 @@ export function getOpenAgency(values) {
   });
 }
 
+export function getAgencyBranches(values) {
+  let openagency = BaseSoapClient.client(wsdl, {});
+
+  return values.id.map((val) => {
+    return openagency.request('pickupAgencyList', {
+      agencyId: val
+    }, {}, true);
+  });
+}
+
 export function searchOpenAgency(values) {
   let params = {
     anyField: '?' + values.query + '?',
-    libraryType: 'Folkebibliotek',
+    libraryType: libraryType,
     pickupAllowed: 1
   };
 
   return makeFindLibraryRequest(params);
 }
 
-export function pickupAgencyList(params) {
-  let openagency = BaseSoapClient.client(wsdl, {});
-  return openagency.request('pickupAgencyListRequest', params, {}, true);
-}
-
 export const METHODS = {
   getOpenAgency: getOpenAgency,
-  searchOpenAgency: searchOpenAgency,
-  pickupAgencyList: pickupAgencyList
+  getAgencyBranches: getAgencyBranches,
+  searchOpenAgency: searchOpenAgency
 };
 
 /**
@@ -52,6 +58,7 @@ export function init(config) {
   if (!wsdl) {
     wsdl = config.wsdl;
   }
+  libraryType = config.libraryType;
 
   return METHODS;
 }

@@ -1,6 +1,6 @@
 {
   "name": "dbc-node-openagency-client",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "Client for dbc openagency webservice",
   "main": "index.js",
   "scripts": {
@@ -11,6 +11,7 @@
     "reinstall": "rm -r node_modules && npm install",
     "test:watch": "mocha --compilers js:babel/register src/**/__tests__/*.test.js -w",
     "test": "mocha --compilers js:babel/register src/__tests__/*.test.js -R mocha-jenkins-reporter",
+    "test:junit": "npm run test",
     "watch": "npm run cleardest && babel ./src --watch -d dist --ignore __tests__"
   },
   "repository": {
@@ -37,6 +38,6 @@
     "mocha-jenkins-reporter": "^0.1.9"
   },
   "dependencies": {
-    "dbc-node-basesoap-client": "^1.1.2"
+    "dbc-node-basesoap-client": "git+https://github.com/DBCDK/dbc-node-basesoap-client#stable_dist"
   }
 }
