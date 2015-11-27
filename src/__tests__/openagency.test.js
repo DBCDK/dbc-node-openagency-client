@@ -1,6 +1,6 @@
 'use strict';
 
-import * as OpenAgency from '../client.js';
+import OpenAgency from '../client.js';
 
 describe('Test OpenAgency Client', () => {
   it('Dummy OpenAgency test for querying search', function(done) {
@@ -13,17 +13,17 @@ describe('Test OpenAgency Client', () => {
       libraryType: 'Folkebibliotek'
     };
 
-    OpenAgency.init(config);
-    let result = OpenAgency.searchOpenAgency({
+    const openAgency = OpenAgency(config);
+    let result = openAgency.searchOpenAgency({
       query: 'aarhus'
     });
 
-    done();
 
     /* eslint-disable no-unused-vars */
     result.then(function(searchResult) {
       /* eslint-enable no-unused-vars */
       // Mostly used for testing during dev, not actually a unit test
+      done();
     });
   });
 
@@ -36,10 +36,10 @@ describe('Test OpenAgency Client', () => {
       wsdl: 'http://openagency.addi.dk/2.22/?wsdl/openagency.wsdl'
     };
 
-    OpenAgency.init(config);
+    const openAgency = OpenAgency(config);
 
 
-    let result = OpenAgency.getOpenAgency({ // eslint-disable-line no-unused-vars
+    let result = openAgency.getOpenAgency({ // eslint-disable-line no-unused-vars
       id: [
         '710120'
       ]

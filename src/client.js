@@ -2,49 +2,33 @@
 
 import * as BaseSoapClient from 'dbc-node-basesoap-client';
 
-let wsdl = null;
-let libraryType = null;
-
-function makeFindLibraryRequest (params) {
-  let openagency = BaseSoapClient.client(wsdl, {});
-  return openagency.request('findLibrary', params, {}, true);
-}
-
-export function getOpenAgency(values) {
-  let openagency = BaseSoapClient.client(wsdl, {});
+function getOpenAgency(client, values) {
 
   return values.id.map((val) => {
-    return openagency.request('findLibrary', {
+    return client.request('findLibrary', {
       agencyId: val
     }, {}, true);
   });
 }
 
-export function getAgencyBranches(values) {
-  let openagency = BaseSoapClient.client(wsdl, {});
+function getAgencyBranches(client, values) {
 
   return values.id.map((val) => {
-    return openagency.request('pickupAgencyList', {
+    return client.request('pickupAgencyList', {
       agencyId: val
     }, {}, true);
   });
 }
 
-export function searchOpenAgency(values) {
+function searchOpenAgency(client, libraryType, values) {
   let params = {
     anyField: '?' + values.query + '?',
     libraryType: libraryType,
     pickupAllowed: 1
   };
 
-  return makeFindLibraryRequest(params);
+  return client.request('findLibrary', params, {}, true);
 }
-
-export const METHODS = {
-  getOpenAgency: getOpenAgency,
-  getAgencyBranches: getAgencyBranches,
-  searchOpenAgency: searchOpenAgency
-};
 
 /**
  * Setting the necessary parameters for the client to be usable.
@@ -54,11 +38,13 @@ export const METHODS = {
  * @param {Object} config Config object with the necessary parameters to use
  * the webservice
  */
-export function init(config) {
-  if (!wsdl) {
-    wsdl = config.wsdl;
-  }
-  libraryType = config.libraryType;
+export default function OpenAgencyClient(config) {
+  const libraryType = config.libraryType;
+  const client = BaseSoapClient.client(config.wsdl, {});
 
-  return METHODS;
+  return {
+    getOpenAgency: getOpenAgency.bind(null, client),
+    getAgencyBranches: getAgencyBranches.bind(null, client),
+    searchOpenAgency: searchOpenAgency.bind(null, client, libraryType)
+  };
 }
