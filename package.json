@@ -1,6 +1,6 @@
 {
   "name": "dbc-node-openagency-client",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Client for dbc openagency webservice",
   "main": "index.js",
   "scripts": {
