@@ -13,6 +13,8 @@ describe('Test OpenAgency Client', () => {
       libraryType: 'Folkebibliotek'
     };
 
+    done();
+
     const openAgency = OpenAgency(config);
     let result = openAgency.searchOpenAgency({
       query: 'aarhus'
@@ -23,7 +25,6 @@ describe('Test OpenAgency Client', () => {
     result.then(function(searchResult) {
       /* eslint-enable no-unused-vars */
       // Mostly used for testing during dev, not actually a unit test
-      done();
     });
   });
 
@@ -38,13 +39,12 @@ describe('Test OpenAgency Client', () => {
 
     const openAgency = OpenAgency(config);
 
+    done();
 
     let result = openAgency.getOpenAgency({ // eslint-disable-line no-unused-vars
       id: [
         '710120'
       ]
     });
-
-    done();
   });
 });
