@@ -48,6 +48,10 @@ function getOpenSearchProfile(client, params) {
   }, {}, true);
 }
 
+function pickupAgencyListRequest(client, params) {
+  return client.request('pickupAgencyList', Object.assign({ outputType: 'xml' }, params));
+}
+
 /**
  * Setting the necessary parameters for the client to be usable.
  * The wsdl is only set if wsdl is null to allow setting it through
@@ -65,7 +69,8 @@ function OpenAgencyClient(config) {
     getOpenAgency: getOpenAgency.bind(null, client),
     getAgencyBranches: getAgencyBranches.bind(null, client),
     getOpenSearchProfile: getOpenSearchProfile.bind(null, client),
-    searchOpenAgency: searchOpenAgency.bind(null, client, libraryType)
+    searchOpenAgency: searchOpenAgency.bind(null, client, libraryType),
+    pickupAgencyListRequest: pickupAgencyListRequest.bind(null, client)
   };
 }
 
